@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     liff
       .init({
-        liffId: process.env.LIFF_ID!,
-        withLoginOnExternalBrowser: true,
+        liffId: "2006627776-MkXdA5XL",
+        // withLoginOnExternalBrowser: true,
       })
       .then(() => {
         console.log("LIFF init succeeded.");
