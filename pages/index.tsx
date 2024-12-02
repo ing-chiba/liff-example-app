@@ -1,7 +1,18 @@
+import type { Profile } from "@liff/get-profile";
+import type { Liff } from "@line/liff";
 import Head from "next/head";
 import packageJson from "../package.json";
 
-export default function Home(props) {
+export default function Home({
+  liff,
+  liffError,
+  profile,
+}: {
+  liff: Liff | null;
+  liffError: string | null;
+  profile: Profile | null;
+}) {
+  // const profile = await liff?.getProfile();
   /** You can access to liff and liffError object through the props.
    *  const { liff, liffError } = props;
    *  console.log(liff.getVersion());
@@ -40,6 +51,8 @@ export default function Home(props) {
             GitHub
           </a>
         </div>
+        <div>氏名： {profile?.displayName ?? "取得に失敗しました"}</div>
+        <br />
         <div className="home__buttons">
           <a
             href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
