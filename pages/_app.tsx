@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     liff
       .init({
         liffId: process.env.LIFF_ID!,
-        // withLoginOnExternalBrowser: true,
+        withLoginOnExternalBrowser: true,
       })
       .then(() => {
         console.log("LIFF init succeeded.");
