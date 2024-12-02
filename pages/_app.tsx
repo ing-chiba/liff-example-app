@@ -20,19 +20,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       .then(() => {
         console.log("LIFF init succeeded.");
         setLiffObject(liff);
+        liff
+          .getProfile()
+          .then((profile) => {
+            console.log("get profile");
+            setProfile(profile);
+          })
+          .catch((error: Error) => {
+            console.log("get profile failed");
+            setLiffError(error.toString());
+          });
       })
       .catch((error: Error) => {
         console.log("LIFF init failed.");
-        setLiffError(error.toString());
-      });
-    liff
-      .getProfile()
-      .then((profile) => {
-        console.log("get profile");
-        setProfile(profile);
-      })
-      .catch((error: Error) => {
-        console.log("get profile failed");
         setLiffError(error.toString());
       });
   }, []);
