@@ -7,15 +7,15 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
-  const [liffError, setLiffError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
     liff
       .init({
-        liffId: "2006627776-MkXdA5XL",
-        // withLoginOnExternalBrowser: true,
+        liffId: process.env.LIFF_ID as string,
+        withLoginOnExternalBrowser: true,
       })
       .then(() => {
         console.log("LIFF init succeeded.");
@@ -28,19 +28,17 @@ function MyApp({ Component, pageProps }: AppProps) {
           })
           .catch((error: Error) => {
             console.log("get profile failed");
-            setLiffError(error.toString());
+            setError(error.toString());
           });
       })
       .catch((error: Error) => {
         console.log("LIFF init failed.");
-        setLiffError(error.toString());
+        setError(error.toString());
       });
   }, []);
 
-  // Provide `liff` object and `liffError` object
-  // to page component as property
   pageProps.liff = liffObject;
-  pageProps.liffError = liffError;
+  pageProps.error = error;
   pageProps.profile = profile;
   return <Component {...pageProps} />;
 }

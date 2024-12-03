@@ -4,11 +4,11 @@ import Head from "next/head";
 
 export default function Home({
   liff,
-  liffError,
   profile,
+  error,
 }: {
   liff: Liff | null;
-  liffError: string | null;
+  error: string | null;
   profile: Profile | null;
 }) {
   /** You can access to liff and liffError object through the props.
@@ -24,13 +24,23 @@ export default function Home({
       </Head>
       <div className="home">
         <p>
-          エラー:
-          {liffError}
+          Liff：
+          {liff?.getVersion() ?? "取得に失敗しました"}
         </p>
         <p>
-          氏名:
-          {profile?.displayName ?? "取得に失敗しました"}
+          氏名：
+          {profile?.displayName}
         </p>
+        <p>
+          LiffId：
+          {process.env.LIFF_ID}
+        </p>
+        {error && (
+          <p>
+            Error：
+            {error}
+          </p>
+        )}
       </div>
     </div>
   );
